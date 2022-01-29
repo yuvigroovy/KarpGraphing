@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         graph.setTitle(preFix);
         p.getSeries().setThickness(8);
         p2.getSeries().setColor(android.R.color.holo_red_light);
-        //graph.addSeries(p2.getSeries());
+
         graph.addSeries(p.getSeries());
 
 
