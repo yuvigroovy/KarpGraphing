@@ -29,11 +29,6 @@ public class MainActivity extends AppCompatActivity {
         Points p2 = new Points(new Expression("x^2"));
         p2.generatePoints((-10.0),10.0,2);
         p.generatePoints((-15.0),15.0,2);
-//        graph.computeScroll();
-//        graph.getViewport().setScalable(true);
-//        graph.getViewport().setScrollable(true);
-//        graph.getViewport().setScalableY(true);
-//        graph.getViewport().setScrollableY(true);
 
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(-150);
