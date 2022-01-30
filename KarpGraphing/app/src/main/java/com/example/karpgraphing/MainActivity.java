@@ -1,11 +1,16 @@
 package com.example.karpgraphing;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +20,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //remove app title
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        //add fuctions button
+        Button add = findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToAddFunction();
+            }
+        });
 
         GraphView graph = findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
@@ -51,5 +65,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void goToAddFunction(){
+        //add function window intent
+        Intent intent  = new Intent(this,addFunction.class);
+        startActivity(intent);
     }
 }
