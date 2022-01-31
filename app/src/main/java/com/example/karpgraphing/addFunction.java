@@ -25,7 +25,8 @@ public class addFunction extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addFunc.putExtra("func",func.getText().toString());
-                startActivity(addFunc);
+                setResult(RESULT_OK, addFunc);
+                finish();
             }
         });
 

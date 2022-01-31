@@ -1,6 +1,7 @@
 package com.example.karpgraphing;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //get function
-        Intent getFunc = getIntent();
-        String func = getFunc.getStringExtra("func");
-
         //graph settings
         GraphView graph = findViewById(R.id.graph);
         graph.getViewport().setYAxisBoundsManual(true);
@@ -45,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setMaxX(80);
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
+
 
         //function params
 //        Expression expression = new Expression(func);
@@ -73,5 +71,18 @@ public class MainActivity extends AppCompatActivity {
         //add function window intent
         Intent intent  = new Intent(this,addFunction.class);
         startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==10 && resultCode==RESULT_OK){
+            GraphView graph = findViewById(R.id.graph);
+            String function = data.getExtras().getString("func");
+            Expression expression = new Expression(function);
+            Points points = new Points(expression);
+            points.generatePoints((-15.0),15.0,2);
+            points.getSeries().setThickness(8);
+            graph.addSeries(points.getSeries());
+        }
     }
 }
