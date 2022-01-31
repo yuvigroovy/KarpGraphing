@@ -36,10 +36,10 @@
                 android:text="settings" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="clear" />
 
         </TableRow>
     </TableLayout>

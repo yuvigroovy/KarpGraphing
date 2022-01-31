@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         //remove app title
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        //add functions button
+        //buttons
+        Button clear = findViewById(R.id.clear);
         Button add = findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
                 goToAddFunction();
             }
         });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
         //graph settings
         GraphView graph = findViewById(R.id.graph);
@@ -42,24 +50,20 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setMaxX(80);
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
+        
+
+//        String preFix = "x^3";
+//        Expression exp = new Expression(preFix);
+//        Points p = new Points(exp);
+//        p.generatePoints((-15.0),15.0,2);
+//
+//        p.getSeries().setThickness(8);
 
 
-        //function params
-//        Expression expression = new Expression(func);
-//        Points points = new Points(expression);
-//        points.generatePoints((-15.0),15.0,2);
-//        points.getSeries().setThickness(8);
-//        graph.addSeries(points.getSeries());
-
-
-        String preFix = "x^3";
-        Expression exp = new Expression(preFix);
-        Points p = new Points(exp);
-        p.generatePoints((-15.0),15.0,2);
-
-        p.getSeries().setThickness(8);
-
-        graph.addSeries(p.getSeries());
+        //temporary point on graph
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
+        series.appendData(new DataPoint(1,1),true,2);
+        graph.addSeries(series);
 
 
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToAddFunction(){
         //add function window intent
         Intent intent  = new Intent(this,addFunction.class);
-        startActivityForResult(intent,1);
+        startActivityForResult(intent,10);
     }
 
     @Override
