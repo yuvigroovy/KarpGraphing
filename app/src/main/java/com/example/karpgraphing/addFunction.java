@@ -15,7 +15,8 @@ public class addFunction extends AppCompatActivity {
         setContentView(R.layout.activity_add_function);
 
         //intent
-        Intent addFunc = new Intent(this,MainActivity.class);
+        Intent in = getIntent();
+        Intent addFunc = new Intent();
 
         //user input
         EditText func = findViewById(R.id.func);
@@ -23,7 +24,7 @@ public class addFunction extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getIntent().putExtra("func",func.getText().toString());
+                addFunc.putExtra("func",func.getText().toString());
                 startActivity(addFunc);
             }
         });

@@ -72,6 +72,6 @@ public class MainActivity extends AppCompatActivity {
     public void goToAddFunction(){
         //add function window intent
         Intent intent  = new Intent(this,addFunction.class);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 }
