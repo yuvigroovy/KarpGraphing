@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                clear();
             }
         });
 
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent  = new Intent(this,addFunction.class);
         startActivityForResult(intent,10);
     }
-    //add new function
 
+    //add new function
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
@@ -84,5 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
             graph.addSeries(points.getSeries());
         }
+    }
+
+    //clear graph
+    public void clear(){
+        GraphView graph = findViewById(R.id.graph);
+        graph.removeAllSeries();
     }
 }
