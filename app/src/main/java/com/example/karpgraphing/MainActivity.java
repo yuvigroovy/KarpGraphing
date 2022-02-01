@@ -1,5 +1,17 @@
 package com.example.karpgraphing;
 
+/***************************************************************************
+              _   __                   _____                 _     _
+             | | / /                  |  __ \               | |   (_)
+            | |/ /  __ _ _ __ _ __   | |  \/_ __ __ _ _ __ | |__  _ _ __   __ _
+           |    \ / _` | '__| '_ \  | | __| '__/ _` | '_ \| '_ \| | '_ \ / _` |
+          | |\  \ (_| | |  | |_) | | |_\ \ | | (_| | |_) | | | | | | | | (_| |
+         |_| \_/\__,_|_|  | .__/   \____/_|  \__,_| .__/|_| |_|_|_| |_|\__, |
+                         | |                     | |                   __/ |
+                         |_|                     |_|                  |___/
+
+ ***************************************************************************/
+
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -82,7 +94,10 @@ public class MainActivity extends AppCompatActivity {
             points.getSeries().setThickness(8);
             //points.getSeries().setColor(getColorNum(countFunc));
 
-            graph.addSeries(points.getSeries());
+            for(int i=0; i<points.getFullSeries().toArray().length; i++){
+                graph.addSeries(points.getFullSeries().get(i));
+            }
+
         }
     }
 

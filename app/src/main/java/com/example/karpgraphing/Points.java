@@ -15,17 +15,16 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 
-public class Points {
-    private ArrayList<Double> points;
-    private ArrayList<Double> undefined;
+public class
+Points {
     private Expression exp; //postfix expression
     private LineGraphSeries<DataPoint> series;
+    private ArrayList<LineGraphSeries<DataPoint>> fullSeries;
     private int maxPoint;
     public Points (Expression exp) {
         this.exp = exp.infixToPostfix();
-        points = new ArrayList<Double>();
         series = new LineGraphSeries<>();
-        undefined = new ArrayList<Double>();
+        fullSeries = new ArrayList<LineGraphSeries<DataPoint>>();
     }  
     
     public void generatePoints(Double min, Double max, double step){
@@ -34,24 +33,22 @@ public class Points {
         for(Double i=min;i<max; i+=0.01){
             res = String.valueOf(exp.substitute(i, 'x').solvePostfix());
             if(!res.equals("Infinity")) {
-                points.add(Double.parseDouble(res));
                 series.appendData(new DataPoint(i, Double.parseDouble(res)), false, 60000);
             }
-            else    
-                undefined.add(i);
+            else{
+                fullSeries.add(series);
+                series = new LineGraphSeries<>();
+            }
         }
-    }
-
-    public ArrayList<Double> getPoints(){
-        return this.points;
+        fullSeries.add(series);
     }
 
     public LineGraphSeries<DataPoint> getSeries(){
         return this.series;
     }
 
-    public ArrayList<Double> getUndefined(){
-        return this.undefined;
+    public ArrayList<LineGraphSeries<DataPoint>> getFullSeries(){
+        return this.fullSeries;
     }
 
 
