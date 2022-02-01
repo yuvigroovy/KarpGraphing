@@ -14,7 +14,6 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,39 +34,31 @@ public class MainActivity extends AppCompatActivity {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                
             }
         });
 
+        //graph startup
+        startGraph();
 
-        //graph settings
+    }
+
+    //initialize graph and styling options
+    public void startGraph(){
         GraphView graph = findViewById(R.id.graph);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(-150);
-        graph.getViewport().setMaxY(150);
+        graph.getViewport().setMinY(-50);
+        graph.getViewport().setMaxY(50);
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(4);
-        graph.getViewport().setMaxX(80);
+        graph.getViewport().setMinX(-50);
+        graph.getViewport().setMaxX(50);
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
-        
-
-//        String preFix = "x^3";
-//        Expression exp = new Expression(preFix);
-//        Points p = new Points(exp);
-//        p.generatePoints((-15.0),15.0,2);
-//
-//        p.getSeries().setThickness(8);
-
 
         //temporary point on graph
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
-        series.appendData(new DataPoint(1,1),true,2);
+        series.appendData(new DataPoint(0,0),true,2);
         graph.addSeries(series);
-
-
-
-
     }
 
     //move to function menu
@@ -76,16 +67,21 @@ public class MainActivity extends AppCompatActivity {
         Intent intent  = new Intent(this,addFunction.class);
         startActivityForResult(intent,10);
     }
+    //add new function
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==10 && resultCode==RESULT_OK){
+
+        if(requestCode==10 && resultCode==RESULT_OK){ //a functions is added
             GraphView graph = findViewById(R.id.graph);
             String function = data.getExtras().getString("func");
             Expression expression = new Expression(function);
             Points points = new Points(expression);
-            points.generatePoints((-15.0),15.0,2);
+            points.generatePoints((-50.0),50.0,2);
+
             points.getSeries().setThickness(8);
+            //points.getSeries().setColor(getColorNum(countFunc));
+
             graph.addSeries(points.getSeries());
         }
     }
