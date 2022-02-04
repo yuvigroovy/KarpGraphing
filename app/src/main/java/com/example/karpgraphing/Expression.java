@@ -109,9 +109,18 @@ public class Expression{
                 nums.push((Number)node);
             } else{
                 Operation op = (Operation)node;
-                Number num1 = nums.pop();
-                Number num2 = nums.pop();
-                nums.push(new Number(op.calc(num2, num1)));
+                if(!nums.isEmpty()) {
+                    Number num1 = nums.pop();
+                    if(!nums.isEmpty()){
+                        Number num2 = nums.pop();
+                        nums.push(new Number(op.calc(num2, num1)));
+                    }
+                    else {
+                        Operation sub = new Operation('*');
+                        nums.push(new Number(sub.calc(new Number(-1.0), num1)));
+                    }
+                }
+
             }
         }
         return nums.pop().getNumber();

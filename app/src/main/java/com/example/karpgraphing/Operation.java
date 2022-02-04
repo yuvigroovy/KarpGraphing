@@ -64,7 +64,7 @@ public class Operation extends Node{
         return 0;     
     }
 
-    //calculate logorithm value.
+    //calculate logarithm value.
     public double logCalc(Number a, Number b){
         if(a.getNumber() == 10)
             return Math.log10(b.getNumber());
