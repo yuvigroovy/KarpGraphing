@@ -26,6 +26,9 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+
+    Driver driver = new Driver();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,17 +90,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode==10 && resultCode==RESULT_OK){ //a functions is added
             GraphView graph = findViewById(R.id.graph);
             String function = data.getExtras().getString("func");
-            Expression expression = new Expression(function);
-            Points points = new Points(expression);
-            points.generatePoints((-50.0),50.0,2);
-
-            points.getSeries().setThickness(8);
-            //points.getSeries().setColor(getColorNum(countFunc));
-
-            for(int i=0; i<points.getFullSeries().toArray().length; i++){
-                graph.addSeries(points.getFullSeries().get(i));
-            }
-
+            graph.addSeries(driver.insertFunction(function));
         }
     }
 
