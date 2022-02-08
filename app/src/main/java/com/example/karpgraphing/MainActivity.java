@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clear();
+                clear(findViewById(R.id.graph));
             }
         });
 
@@ -61,14 +61,8 @@ public class MainActivity extends AppCompatActivity {
     //initialize graph and styling options
     public void startGraph(){
         GraphView graph = findViewById(R.id.graph);
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(-50);
-        graph.getViewport().setMaxY(50);
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(-50);
-        graph.getViewport().setMaxX(50);
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(true);
+
+        initGraph(graph);
 
         //temporary point on graph
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
@@ -94,9 +88,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void initGraph(GraphView graph){
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(-50);
+        graph.getViewport().setMaxY(50);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(-50);
+        graph.getViewport().setMaxX(50);
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScalableY(true);
+    }
+
     //clear graph
-    public void clear(){
-        GraphView graph = findViewById(R.id.graph);
+    public void clear(GraphView graph){
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         graph.removeAllSeries();
+        series.appendData(new DataPoint(0,0),true,2);
+        graph.addSeries(series);
+        driver.clearFunctions();
     }
 }

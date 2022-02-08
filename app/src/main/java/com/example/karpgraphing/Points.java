@@ -27,7 +27,7 @@ Points {
         fullSeries = new ArrayList<LineGraphSeries<DataPoint>>();
     }  
     
-    public void generatePoints(Double min, Double max, double step){
+    public void generatePoints(Double min, Double max){
         String res;
         //maxPoint = ((max - min) / 0.1);
         for(Double i=min;i<max; i+=0.01){
