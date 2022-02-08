@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     //move to function menu
     public void goToAddFunction(){
         //add function window intent
-        Intent intent  = new Intent(this,addFunction.class);
+        Intent intent  = new Intent(this, addFunctionActivity.class);
         startActivityForResult(intent,10);
     }
 
