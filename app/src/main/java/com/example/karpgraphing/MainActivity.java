@@ -18,6 +18,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,17 +27,26 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
-    Driver driver = new Driver();
+    private Driver driver = new Driver();
+    private RecyclerView funcList;
+    private ArrayList<FunctionDetails> list;
+    private FunctionListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //recycle view
+        list = new ArrayList<FunctionDetails>();
+        funcList = findViewById(R.id.functions_list);
+
 
         //remove app title
         Objects.requireNonNull(getSupportActionBar()).hide();
@@ -88,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
             GraphView graph = findViewById(R.id.graph);
             String function = data.getExtras().getString("func");
             graph.addSeries(driver.insertFunction(function));
+            list.add(new FunctionDetails(driver.getNameLastIndex(),driver.getNumOfFunctions()));
+            adapter = new FunctionListAdapter(list);
+            funcList.setAdapter(adapter);
+            funcList.setLayoutManager(new LinearLayoutManager(this));
+
         }
     }
 

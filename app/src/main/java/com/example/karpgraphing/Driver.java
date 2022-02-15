@@ -25,15 +25,15 @@ import java.util.ArrayList;
 
 public class Driver {
     private ArrayList<LineGraphSeries<DataPoint>> functions;
+    private ArrayList<String> funcNames;
     private int[] colors;
     private int countFunc;
-    private Color myRed;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Driver(){
         this.functions = new ArrayList<LineGraphSeries<DataPoint>>();
+        funcNames = new ArrayList<String>();
         this.countFunc = 0;
-        this.myRed = Color.valueOf(199,68,64,1);
         colors = new int[]{
                 parseColor("#FF6363"), // color red
                 parseColor("#BAFFB4"), // color green
@@ -45,6 +45,7 @@ public class Driver {
 
     public LineGraphSeries<DataPoint> insertFunction(String fun){
         countFunc++;
+        funcNames.add(fun);
         int colorToInsert = countFunc;
         Expression expression = new Expression(fun);
         Points points = new Points(expression);
@@ -61,5 +62,14 @@ public class Driver {
         this.countFunc =0;
         this.functions.clear();
     }
+
+    public String getNameLastIndex(){
+        return funcNames.get(funcNames.size()-1);
+    }
+
+    public int getNumOfFunctions(){
+        return this.countFunc;
+    }
+
 
 }
