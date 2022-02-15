@@ -12,7 +12,11 @@ package com.example.karpgraphing;
 
  ***************************************************************************/
 
+import static android.graphics.Color.parseColor;
+
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -23,19 +27,19 @@ public class Driver {
     private ArrayList<LineGraphSeries<DataPoint>> functions;
     private int[] colors;
     private int countFunc;
+    private Color myRed;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Driver(){
         this.functions = new ArrayList<LineGraphSeries<DataPoint>>();
-        countFunc = 0;
+        this.countFunc = 0;
+        this.myRed = Color.valueOf(199,68,64,1);
         colors = new int[]{
-                Color.BLUE,
-                Color.RED,
-                Color.GREEN,
-                Color.CYAN,
-                Color.MAGENTA,
-                Color.YELLOW,
-                Color.BLACK,
-                Color.GRAY
+                parseColor("#FF6363"), // color red
+                parseColor("#BAFFB4"), // color green
+                parseColor("#548CFF"), // color blue
+                parseColor("#F58634"), // color orange
+                parseColor("#0A1D37"), // color black
         };
     }
 
@@ -48,7 +52,7 @@ public class Driver {
         points.getSeries().setThickness(8);
         if(colorToInsert > this.colors.length-1)
             colorToInsert -= this.colors.length;
-        points.getSeries().setColor(colors[colorToInsert]);
+        points.getSeries().setColor(colors[colorToInsert-1]);
         functions.add(points.getSeries());
         return points.getSeries();
     }
