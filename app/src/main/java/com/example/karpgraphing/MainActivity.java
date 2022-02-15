@@ -13,7 +13,9 @@ package com.example.karpgraphing;
  ***************************************************************************/
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.Objects;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
     Driver driver = new Driver();
