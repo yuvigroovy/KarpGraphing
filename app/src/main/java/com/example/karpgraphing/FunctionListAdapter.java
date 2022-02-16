@@ -32,14 +32,11 @@ public class FunctionListAdapter extends RecyclerView.Adapter<FunctionListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        int color = i;
-        if(color > 4)
-            color -= 4;
         FunctionDetails pos = list.get(i);
 
         viewHolder.funcName.setText("y=" + pos.getFun());
 
-        switch(color){
+        switch(list.get(i).getColor()){
             case 0:
                 viewHolder.icon.setImageResource(R.drawable.clr0);
                 break;

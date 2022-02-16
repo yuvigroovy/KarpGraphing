@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             GraphView graph = findViewById(R.id.graph);
             String function = data.getExtras().getString("func");
             graph.addSeries(driver.insertFunction(function));
-            list.add(new FunctionDetails(driver.getNameLastIndex(),driver.getNumOfFunctions()));
+            list.add(new FunctionDetails(driver.getNameLastIndex(),driver.getColorToInsert()));
             adapter = new FunctionListAdapter(list);
             funcList.setAdapter(adapter);
             funcList.setLayoutManager(new LinearLayoutManager(this));

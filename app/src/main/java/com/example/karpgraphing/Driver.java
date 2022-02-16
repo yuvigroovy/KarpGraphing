@@ -27,6 +27,7 @@ public class Driver {
     private ArrayList<LineGraphSeries<DataPoint>> functions;
     private ArrayList<String> funcNames;
     private int[] colors;
+    private int colorToInsert;
     private int countFunc;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -44,16 +45,13 @@ public class Driver {
     }
 
     public LineGraphSeries<DataPoint> insertFunction(String fun){
-        countFunc++;
         funcNames.add(fun);
-        int colorToInsert = countFunc;
+        colorToInsert = (countFunc++) % this.colors.length;
         Expression expression = new Expression(fun);
         Points points = new Points(expression);
         points.generatePoints((-50.0),50.0);
         points.getSeries().setThickness(8);
-        if(colorToInsert > this.colors.length-1)
-            colorToInsert -= this.colors.length;
-        points.getSeries().setColor(colors[colorToInsert-1]);
+        points.getSeries().setColor(colors[colorToInsert]);
         functions.add(points.getSeries());
         return points.getSeries();
     }
@@ -71,5 +69,7 @@ public class Driver {
         return this.countFunc;
     }
 
-
+    public int getColorToInsert(){
+        return this.colorToInsert;
+    }
 }
