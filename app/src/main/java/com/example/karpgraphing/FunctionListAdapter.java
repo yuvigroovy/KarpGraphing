@@ -1,5 +1,7 @@
 package com.example.karpgraphing;
 
+import static android.graphics.Color.parseColor;
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -30,8 +32,34 @@ public class FunctionListAdapter extends RecyclerView.Adapter<FunctionListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.funcName.setText(list.get(i).getFun());
-        viewHolder.icon.setImageResource(R.drawable.clr0);
+        int color = i;
+        if(color > 4)
+            color -= 4;
+        FunctionDetails pos = list.get(i);
+
+        viewHolder.funcName.setText("y=" + pos.getFun());
+
+        switch(color){
+            case 0:
+                viewHolder.icon.setImageResource(R.drawable.clr0);
+                break;
+            case 1:
+                viewHolder.icon.setImageResource(R.drawable.clr1);
+                break;
+            case 2:
+                viewHolder.icon.setImageResource(R.drawable.clr2);
+                break;
+            case 3:
+                viewHolder.icon.setImageResource(R.drawable.clr3);
+                break;
+            case 4:
+                viewHolder.icon.setImageResource(R.drawable.clr4);
+                break;
+            default:
+                viewHolder.icon.setImageResource(R.drawable.clr0);
+                break;
+
+        }
     }
 
     @Override
