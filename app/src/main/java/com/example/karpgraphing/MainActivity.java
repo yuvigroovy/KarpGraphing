@@ -125,5 +125,7 @@ public class MainActivity extends AppCompatActivity {
         series.appendData(new DataPoint(0,0),true,2);
         graph.addSeries(series);
         driver.clearFunctions();
+        list.clear();
+        adapter.notifyDataSetChanged();
     }
 }
