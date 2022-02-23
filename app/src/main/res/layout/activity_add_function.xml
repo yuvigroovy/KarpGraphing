@@ -6,37 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".addFunctionActivity">
 
-    <EditText
-        android:id="@+id/func"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:hint="Enter Function"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addFunctionTitle"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
-
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#039BE5"
         android:text="add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/func"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Pow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_marginStart="108dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#baffc9"
         android:text="pow"
@@ -65,9 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/func"
-        app:layout_constraintVertical_bias="0.94">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TableRow
             android:id="@+id/tableRow"
@@ -262,7 +246,7 @@
         android:id="@+id/addBtn"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="90dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#BAE1FF"
         android:onClick="putAdd"
@@ -281,4 +265,17 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/Pow"
         app:layout_constraintStart_toEndOf="@+id/Pow" />
+
+    <EditText
+        android:id="@+id/function"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addFunctionTitle" />
+
 </android.support.constraint.ConstraintLayout>

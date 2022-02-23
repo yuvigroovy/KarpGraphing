@@ -12,6 +12,7 @@ package com.example.karpgraphing;
 
  ***************************************************************************/
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -25,10 +26,13 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class addFunctionActivity extends AppCompatActivity {
     Button log;
     Button pow;
     String function;
+    String parsedFunctions;
     Dialog powDialog;
     EditText func;
     EditText a;
@@ -39,6 +43,8 @@ public class addFunctionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_function);
 
+        //remove app title
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         //numpad init
         TableLayout keypad = findViewById(R.id.keypad);
@@ -52,7 +58,7 @@ public class addFunctionActivity extends AppCompatActivity {
             });
         }
 
-        func = findViewById(R.id.func);
+        func = findViewById(R.id.function);
         Button submit = findViewById(R.id.submit);
 
         log = findViewById(R.id.logBtn);
