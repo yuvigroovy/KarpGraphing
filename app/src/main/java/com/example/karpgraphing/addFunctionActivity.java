@@ -138,6 +138,26 @@ public class addFunctionActivity extends AppCompatActivity {
         func.setText(function);
     }
 
+    public void putAdd(View v){
+        function += '+';
+        func.setText(function);
+    }
+
+    public void putSub(View v){
+        function += '-';
+        func.setText(function);
+    }
+
+    public void putMul(View v){
+        function += '*';
+        func.setText(function);
+    }
+
+    public void putDiv(View v){
+        function += '/';
+        func.setText(function);
+    }
+
     public void putNum(int num){
         function += num;
         func.setText(function);
