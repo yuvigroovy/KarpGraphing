@@ -123,9 +123,7 @@ public class addFunctionActivity extends AppCompatActivity {
     }
 
     public void putPow(){
-        function += a.getText().toString();
-        function += '^';
-        function += b.getText().toString();
+        function += a.getText().toString() + "^(" + b.getText().toString() + ')';
         func.setText(function);
         dg.dismiss();
     }
