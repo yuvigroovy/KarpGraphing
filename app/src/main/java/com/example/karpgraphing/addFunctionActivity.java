@@ -26,10 +26,10 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class addFunctionActivity extends AppCompatActivity {
-
+    Button log;
     Button pow;
     String function;
-    Dialog dg;
+    Dialog powDialog;
     EditText func;
     EditText a;
     EditText b;
@@ -40,8 +40,8 @@ public class addFunctionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_function);
 
-        //Button key;
 
+        //numpad init
         TableLayout keypad = findViewById(R.id.keypad);
         for (int i = 0; i < 9; i++) {
             Button key = keypad.findViewWithTag(i+"");
@@ -56,22 +56,26 @@ public class addFunctionActivity extends AppCompatActivity {
         func = findViewById(R.id.func);
         Button submit = findViewById(R.id.submit);
 
-        pow = findViewById(R.id.Pow);
-        pow.setText(Html.fromHtml("a<sup><small>b</small></sup>"));
+        log = findViewById(R.id.logBtn);
+        log.setText(Html.fromHtml("\uD835\uDC59\uD835\uDC5C\uD835\uDC54<sub><small>\uD835\uDC4E</small></sub>\uD835\uDC4F"));
 
-        dg = new Dialog(this);
-        dg.setContentView(R.layout.dialog);
-        dg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //pow func button init
+        pow = findViewById(R.id.Pow);
+        pow.setText(Html.fromHtml("\uD835\uDC4E<sup><small>\uD835\uDC4F</small></sup>"));
+
+        powDialog = new Dialog(this);
+        powDialog.setContentView(R.layout.dialog);
+        powDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         function = "";
 
-        Button submitPow = dg.findViewById(R.id.submitPow);
-        Button cancel = dg.findViewById(R.id.cancel);
+        Button submitPow = powDialog.findViewById(R.id.submitPow);
+        Button cancel = powDialog.findViewById(R.id.cancel);
 
-        a = dg.findViewById(R.id.a);
-        b = dg.findViewById(R.id.b);
+        a = powDialog.findViewById(R.id.a);
+        b = powDialog.findViewById(R.id.b);
 
-        TextView txt = dg.findViewById(R.id.Title);
+        TextView txt = powDialog.findViewById(R.id.Title);
         txt.setText(Html.fromHtml("a<sup><small>b</small></sup>"));
 
         pow.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +113,7 @@ public class addFunctionActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dg.dismiss();
+                powDialog.dismiss();
             }
         });
 
@@ -119,13 +123,13 @@ public class addFunctionActivity extends AppCompatActivity {
 
     public void powOnClick(){
         function = func.getText().toString();
-        dg.show();
+        powDialog.show();
     }
 
     public void putPow(){
         function += a.getText().toString() + "^(" + b.getText().toString() + ')';
         func.setText(function);
-        dg.dismiss();
+        powDialog.dismiss();
     }
 
     public void putX(View v){

@@ -40,6 +40,7 @@
         android:layout_marginBottom="16dp"
         android:text="pow"
         android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -262,6 +263,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="log"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/Pow"
         app:layout_constraintStart_toEndOf="@+id/Pow" />
 </android.support.constraint.ConstraintLayout>
