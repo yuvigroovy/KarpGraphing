@@ -33,7 +33,6 @@ public class addFunctionActivity extends AppCompatActivity {
     EditText func;
     EditText a;
     EditText b;
-    int tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +56,11 @@ public class addFunctionActivity extends AppCompatActivity {
         Button submit = findViewById(R.id.submit);
 
         log = findViewById(R.id.logBtn);
-        log.setText(Html.fromHtml("\uD835\uDC59\uD835\uDC5C\uD835\uDC54<sub><small>\uD835\uDC4E</small></sub>\uD835\uDC4F"));
+        log.setText(Html.fromHtml(MathFont.l + MathFont.o + MathFont.g +"<sub><small>"+ MathFont.a +"</small></sub>" + MathFont.b));
 
         //pow func button init
         pow = findViewById(R.id.Pow);
-        pow.setText(Html.fromHtml("\uD835\uDC4E<sup><small>\uD835\uDC4F</small></sup>"));
+        pow.setText(Html.fromHtml(MathFont.a + "<sup><small>" + MathFont.b + "</small></sup>"));
 
         powDialog = new Dialog(this);
         powDialog.setContentView(R.layout.dialog);
@@ -76,7 +75,7 @@ public class addFunctionActivity extends AppCompatActivity {
         b = powDialog.findViewById(R.id.b);
 
         TextView txt = powDialog.findViewById(R.id.Title);
-        txt.setText(Html.fromHtml("a<sup><small>b</small></sup>"));
+        txt.setText(Html.fromHtml(MathFont.a + "<sup><small>" + MathFont.b + "</small></sup>"));
 
         pow.setOnClickListener(new View.OnClickListener() {
             @Override
