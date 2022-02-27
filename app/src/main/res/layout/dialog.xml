@@ -42,7 +42,7 @@
                 android:ems="10"
                 android:hint="a:"
                 android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/submitPow"
+                app:layout_constraintBottom_toTopOf="@+id/submitDialog"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -60,7 +60,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Button
-                android:id="@+id/submitPow"
+                android:id="@+id/submitDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

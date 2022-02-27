@@ -12,7 +12,6 @@ package com.example.karpgraphing;
 
  ***************************************************************************/
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +19,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,16 +27,18 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.Objects;
-
+//
 public class addFunctionActivity extends AppCompatActivity {
     Button log;
     Button pow;
+    Button submitDialog;
     String function;
-    String parsedFunctions;
-    Dialog powDialog;
+    Spanned parsedFunction;
+    Dialog dialog;
     EditText func;
     EditText a;
     EditText b;
+    TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,28 +63,29 @@ public class addFunctionActivity extends AppCompatActivity {
         func = findViewById(R.id.function);
         Button submit = findViewById(R.id.submit);
 
+        //log function button init
         log = findViewById(R.id.logBtn);
         log.setText(Html.fromHtml(MathFont.l + MathFont.o + MathFont.g +"<sub><small>"+ MathFont.a +"</small></sub>" + MathFont.b));
 
-        //pow func button init
+        //pow function button init
         pow = findViewById(R.id.Pow);
         pow.setText(Html.fromHtml(MathFont.a + "<sup><small>" + MathFont.b + "</small></sup>"));
 
-        powDialog = new Dialog(this);
-        powDialog.setContentView(R.layout.dialog);
-        powDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         function = "";
 
-        Button submitPow = powDialog.findViewById(R.id.submitPow);
-        Button cancel = powDialog.findViewById(R.id.cancel);
+        submitDialog = dialog.findViewById(R.id.submitDialog);
+        Button cancel = dialog.findViewById(R.id.cancel);
 
-        a = powDialog.findViewById(R.id.a);
-        b = powDialog.findViewById(R.id.b);
+        a = dialog.findViewById(R.id.a);
+        b = dialog.findViewById(R.id.b);
 
-        TextView txt = powDialog.findViewById(R.id.Title);
-        txt.setText(Html.fromHtml(MathFont.a + "<sup><small>" + MathFont.b + "</small></sup>"));
+        txt = dialog.findViewById(R.id.Title);
 
+        //pow function button onclick
         pow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,15 +93,18 @@ public class addFunctionActivity extends AppCompatActivity {
             }
         });
 
-        //intent
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOnClick();
+            }
+        });
+
+        //intent function to main activity
         Intent in = getIntent();
         Intent addFunc = new Intent();
 
-
-
-
-        //user input
-
+        // submit function to main activity
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,33 +114,48 @@ public class addFunctionActivity extends AppCompatActivity {
             }
         });
 
-        submitPow.setOnClickListener(new View.OnClickListener() {
+        //cancel dialog
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void logOnClick(){
+        function = func.getText().toString();
+        txt.setText(Html.fromHtml(MathFont.l +MathFont.o + MathFont.g + "<sup><small>" + MathFont.a + "</small></sup>" + MathFont.b));
+
+        submitDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putLog();
+            }
+        });
+
+        dialog.show();
+    }
+
+    public void powOnClick(){
+        function = func.getText().toString();
+        txt.setText(Html.fromHtml(MathFont.a + "<sup><small>" + MathFont.b + "</small></sup>"));
+
+        submitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 putPow();
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                powDialog.dismiss();
-            }
-        });
-
-
-
-    }
-
-    public void powOnClick(){
-        function = func.getText().toString();
-        powDialog.show();
+        dialog.show();
     }
 
     public void putPow(){
         function += a.getText().toString() + "^(" + b.getText().toString() + ')';
+        parsedFunction = func.getText();
         func.setText(function);
-        powDialog.dismiss();
+        dialog.dismiss();
     }
 
     public void putX(View v){
@@ -172,6 +193,11 @@ public class addFunctionActivity extends AppCompatActivity {
         func.setText(function);
     }
 
-
+    public void putLog(){
+        function += "(" + a.getText().toString() + ")!(" + b.getText().toString() + ')';
+        parsedFunction = func.getText();
+        func.setText(function);
+        dialog.dismiss();
+    }
 
 }
