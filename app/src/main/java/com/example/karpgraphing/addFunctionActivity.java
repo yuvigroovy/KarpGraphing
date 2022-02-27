@@ -27,7 +27,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.Objects;
-//
+
 public class addFunctionActivity extends AppCompatActivity {
     Button log;
     Button pow;
@@ -108,7 +108,7 @@ public class addFunctionActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addFunc.putExtra("func",func.getText().toString());
+                addFunc.putExtra("func",function);
                 setResult(RESULT_OK, addFunc);
                 finish();
             }
@@ -125,7 +125,7 @@ public class addFunctionActivity extends AppCompatActivity {
 
     public void logOnClick(){
         function = func.getText().toString();
-        txt.setText(Html.fromHtml(MathFont.l +MathFont.o + MathFont.g + "<sup><small>" + MathFont.a + "</small></sup>" + MathFont.b));
+        txt.setText(Html.fromHtml(MathFont.l +MathFont.o + MathFont.g + "<sub><small>" + MathFont.a + "</small></sub>" + MathFont.b));
 
         submitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,49 +154,56 @@ public class addFunctionActivity extends AppCompatActivity {
     public void putPow(){
         function += a.getText().toString() + "^(" + b.getText().toString() + ')';
         parsedFunction = func.getText();
-        func.setText(function);
+        func.setText(Html.fromHtml(parsedFunction.toString() + a.getText() + "<sup><small>" + b.getText() + "</small></sup>"));
         dialog.dismiss();
     }
 
     public void putX(View v){
         function += 'x';
-        func.setText(function);
+        parsedFunction = func.getText();
+        func.setText(Html.fromHtml(this.func.getText() + "x"));
     }
 
     public void putDecimalPoint(View v){
         function += '.';
-        func.setText(function);
+        parsedFunction = func.getText();
+        func.setText(Html.fromHtml(parsedFunction.toString() + "."));
     }
 
     public void putAdd(View v){
         function += '+';
-        func.setText(function);
+        parsedFunction = func.getText();
+        func.setText(Html.fromHtml(parsedFunction.toString() + "+"));
     }
 
     public void putSub(View v){
         function += '-';
-        func.setText(function);
+        parsedFunction = func.getText();
+        func.setText(Html.fromHtml(parsedFunction.toString() + "-"));
     }
 
     public void putMul(View v){
         function += '*';
-        func.setText(function);
+        parsedFunction = func.getText();
+        func.setText(Html.fromHtml(parsedFunction.toString() + "·"));
     }
 
     public void putDiv(View v){
         function += '/';
-        func.setText(function);
+        parsedFunction = func.getText();
+        func.setText(Html.fromHtml(parsedFunction.toString() + "/"));
     }
 
     public void putNum(int num){
         function += num;
-        func.setText(function);
+        parsedFunction = func.getText();
+        func.setText(Html.fromHtml(parsedFunction.toString() + num));
     }
 
     public void putLog(){
         function += "(" + a.getText().toString() + ")!(" + b.getText().toString() + ')';
         parsedFunction = func.getText();
-        func.setText(function);
+        func.setText(Html.fromHtml(parsedFunction.toString() +MathFont.l +MathFont.o + MathFont.g + "<sub><small>" + a.getText() + "</small></sub>" + b.getText()));
         dialog.dismiss();
     }
 
