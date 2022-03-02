@@ -130,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="#80deea"
-        app:cardBackgroundColor="#ffffff"
+        app:cardBackgroundColor="#babdbe"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +138,8 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
 
             <EditText
                 android:id="@+id/function"
@@ -166,7 +167,8 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
 
             <TableLayout
                 android:id="@+id/keypad"
@@ -305,7 +307,7 @@
                         android:id="@+id/varX"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#ffffff"
+                        android:backgroundTint="#607d8c"
                         android:onClick="putX"
                         android:text="x" />
 
