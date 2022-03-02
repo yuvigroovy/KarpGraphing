@@ -1,5 +1,5 @@
 package com.example.karpgraphing.exp;
 
-public interface BaseExpression {
-    public double solve(NameSpace ns);
+public abstract class BaseExpression {
+    public abstract double solve(NameSpace ns);
 }
