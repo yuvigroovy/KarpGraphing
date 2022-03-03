@@ -2,6 +2,7 @@ package com.example.karpgraphing.exp;
 
 public class DivExpression extends Expression{
     public DivExpression(BaseExpression a, BaseExpression b){
+        precedence = 2;
         this.a = a;
         this.b = b;
     }

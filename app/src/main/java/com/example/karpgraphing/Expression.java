@@ -64,6 +64,10 @@ public class Expression{
         nodes.add(num);
     }
 
+    public void addNode(Node nd){
+        nodes.add(nd);
+    }
+
     public void addOperator(Operation op) {
         nodes.add(op);
     }
@@ -78,21 +82,24 @@ public class Expression{
     public Expression infixToPostfix() {
         Expression postfix = new Expression();
         Stack<Operation> ops = new Stack<Operation>();
+        Stack<Node> nums = new Stack<Node>();
         for(Node node : nodes)
         {
             if(node instanceof Operation){
-                if(ops.isEmpty() || ((Operation)node).compare(ops.peek()))
+                if(!ops.isEmpty() || ((Operation)node).compare(ops.peek()))
                     ops.push((Operation) node);
-                else if(!((Operation)node).compare(ops.peek())){
+                else if(((Operation)node).compare(ops.peek())){
                     postfix.addOperator(ops.pop());
                     ops.push((Operation)node);
                 }
             }
             else if(node instanceof Number)
-                postfix.addNumber((Number)node);
-            else
-                postfix.addVariable((Variable) node);
+                nums.push(node);
         }
+        while(!nums.isEmpty()){
+            postfix.addNode(nums.pop());
+        }
+
         while(!ops.isEmpty())
         {
             postfix.addOperator((Operation)ops.pop());
