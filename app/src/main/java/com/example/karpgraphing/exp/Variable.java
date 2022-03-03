@@ -1,6 +1,6 @@
 package com.example.karpgraphing.exp;
 
-public class Variable implements BaseExpression {
+public class Variable extends BaseExpression {
     String var;
     public Variable(String var){
         this.var = var;
