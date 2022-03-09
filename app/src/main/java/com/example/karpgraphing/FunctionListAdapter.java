@@ -5,6 +5,7 @@ import static android.graphics.Color.parseColor;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class FunctionListAdapter extends RecyclerView.Adapter<FunctionListAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         FunctionDetails pos = list.get(i);
 
-        viewHolder.funcName.setText("y=" + pos.getFun());
+        viewHolder.funcName.setText(Html.fromHtml(htmlParser("y=" + pos.getFun())));
 
         switch(list.get(i).getColor()){
             case 0:
@@ -74,6 +75,26 @@ public class FunctionListAdapter extends RecyclerView.Adapter<FunctionListAdapte
             funcName = view.findViewById(R.id.funcText);
             icon = view.findViewById(R.id.icon);
         }
+    }
+
+    public String htmlParser(String fun){
+        String parsed ="";
+        for(int i=0; i<fun.length(); i++){
+            if (fun.charAt(i) == '*')
+                parsed += '·';
+            else if(fun.charAt(i) == '^'){
+                parsed +="<sup><small>";
+                i+=2;
+                while(fun.charAt(i) != ')'){
+                    parsed += fun.charAt(i);
+                    i++;
+                }
+                parsed +="</small></sup>";
+            }
+            else
+                parsed += fun.charAt(i);
+        }
+        return parsed;
     }
 
 
