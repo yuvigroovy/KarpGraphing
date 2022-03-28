@@ -16,15 +16,16 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import com.example.karpgraphing.exp.Expression;
 
 import java.util.Objects;
 
@@ -39,7 +40,7 @@ public class addFunctionActivity extends AppCompatActivity {
     EditText a;
     EditText b;
     TextView txt;
-
+    Expression expression;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class addFunctionActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     putNum(Integer.parseInt((String) key.getTag()));
+
                 }
             });
         }
@@ -152,60 +154,7 @@ public class addFunctionActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void putPow(){
-        function += a.getText().toString() + "^(" + b.getText().toString() + ')';
-        parsedFunction += a.getText() + "<sup><small>" + b.getText() + "</small></sup>";
-        func.setText(Html.fromHtml(parsedFunction));
-        dialog.dismiss();
+    private void updateExpression(){
+        func.setText(Html.fromHtml(expression.toHtmlString()));
     }
-
-    public void putX(View v){
-        function += 'x';
-        parsedFunction += "x";
-        func.setText(Html.fromHtml(parsedFunction));
-    }
-
-    public void putDecimalPoint(View v){
-        function += '.';
-        parsedFunction += ".";
-        func.setText(Html.fromHtml(parsedFunction));
-    }
-
-    public void putAdd(View v){
-        function += '+';
-        parsedFunction += "+";
-        func.setText(Html.fromHtml(parsedFunction));
-    }
-
-    public void putSub(View v){
-        function += '-';
-        parsedFunction = "-";
-        func.setText(Html.fromHtml(parsedFunction));
-    }
-
-    public void putMul(View v){
-        function += '*';
-        parsedFunction += "·";
-        func.setText(Html.fromHtml(parsedFunction));
-    }
-
-    public void putDiv(View v){
-        function += '/';
-        parsedFunction += "/";
-        func.setText(Html.fromHtml(parsedFunction));
-    }
-
-    public void putNum(int num){
-        function += num;
-        parsedFunction += num;
-        func.setText(Html.fromHtml(parsedFunction));
-    }
-
-    public void putLog(){
-        function += "(" + a.getText().toString() + ")!(" + b.getText().toString() + ')';
-        parsedFunction += MathFont.l +MathFont.o + MathFont.g + "<sub><small>" + a.getText() + "</small></sub>" + b.getText();
-        func.setText(Html.fromHtml(parsedFunction));
-        dialog.dismiss();
-    }
-
 }

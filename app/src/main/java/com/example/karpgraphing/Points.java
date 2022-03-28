@@ -10,6 +10,7 @@ package com.example.karpgraphing;
                         |_|                     |_|                  |___/
 
 ***************************************************************************/
+import com.example.karpgraphing.exp.Calc;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 
 public class
 Points {
-    private Expression exp; //postfix expression
+    private String rawExpression;
+    private Calc exp; //postfix expression
     private LineGraphSeries<DataPoint> series;
     private ArrayList<LineGraphSeries<DataPoint>> fullSeries;
     private int maxPoint;

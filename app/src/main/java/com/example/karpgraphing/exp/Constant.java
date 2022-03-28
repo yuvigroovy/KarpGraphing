@@ -3,12 +3,22 @@ package com.example.karpgraphing.exp;
 public class Constant extends BaseExpression {
     private double num;
 
-    Constant(double num) {
-        this.num = num;
+    Constant(String num) {
+        //this.num = num;
     }
 
     @Override
     public double solve(NameSpace ns) {
         return this.num;
+    }
+
+    @Override
+    public String toHtmlString() {
+        return String.valueOf(num);
+    }
+
+    @Override
+    public String toPlainString() {
+        return String.valueOf(num);
     }
 }

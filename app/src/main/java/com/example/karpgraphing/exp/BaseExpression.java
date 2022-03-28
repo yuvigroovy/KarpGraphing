@@ -5,4 +5,6 @@ public abstract class BaseExpression {
 
     public abstract String toHtmlString();
     public abstract String toPlainString();
+
 }
+
