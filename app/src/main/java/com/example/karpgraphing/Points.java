@@ -23,19 +23,19 @@ Points {
     private LineGraphSeries<DataPoint> series;
     private ArrayList<LineGraphSeries<DataPoint>> fullSeries;
     private int maxPoint;
-    public Points (Expression exp) {
-        this.exp = exp.infixToPostfix();
+    public Points (String rawExp) {
+        this.rawExpression = rawExp;
+        this.exp = new Calc(rawExpression);
         series = new LineGraphSeries<>();
         fullSeries = new ArrayList<LineGraphSeries<DataPoint>>();
     }  
     
     public void generatePoints(Double min, Double max){
-        String res;
-        //maxPoint = ((max - min) / 0.1);
+        Double res;
         for(Double i=min;i<max; i+=0.01){
-            res = String.valueOf(exp.substitute(i, 'x').solvePostfix());
+            res = exp.solve(i);
             if(!res.equals("Infinity")) {
-                series.appendData(new DataPoint(i, Double.parseDouble(res)), false, 60000);
+                series.appendData(new DataPoint(i, res), false, 60000);
             }
             else{
                 fullSeries.add(series);

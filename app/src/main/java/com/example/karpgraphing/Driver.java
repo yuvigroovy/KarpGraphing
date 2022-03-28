@@ -3,7 +3,6 @@ package com.example.karpgraphing;
 
 import static android.graphics.Color.parseColor;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
@@ -36,8 +35,7 @@ public class Driver {
     public LineGraphSeries<DataPoint> insertFunction(String fun){
         funcNames.add(fun);
         colorToInsert = (countFunc++) % this.colors.length;
-        Expression expression = new Expression(fun);
-        Points points = new Points(expression);
+        Points points = new Points(fun);
         points.generatePoints((-50.0),50.0);
         points.getSeries().setThickness(8);
         points.getSeries().setColor(colors[colorToInsert]);
