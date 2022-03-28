@@ -1,15 +1,14 @@
 package com.example.karpgraphing;
 
 /***************************************************************************
-              _   __                   _____                 _     _
-             | | / /                  |  __ \               | |   (_)
-            | |/ /  __ _ _ __ _ __   | |  \/_ __ __ _ _ __ | |__  _ _ __   __ _
-           |    \ / _` | '__| '_ \  | | __| '__/ _` | '_ \| '_ \| | '_ \ / _` |
-          | |\  \ (_| | |  | |_) | | |_\ \ | | (_| | |_) | | | | | | | | (_| |
-         |_| \_/\__,_|_|  | .__/   \____/_|  \__,_| .__/|_| |_|_|_| |_|\__, |
-                         | |                     | |                   __/ |
-                         |_|                     |_|                  |___/
-
+ _   __                   _____                 _     _
+ | | / /                  |  __ \               | |   (_)
+ | |/ /  __ _ _ __ _ __   | |  \/_ __ __ _ _ __ | |__  _ _ __   __ _
+ |    \ / _` | '__| '_ \  | | __| '__/ _` | '_ \| '_ \| | '_ \ / _` |
+ | |\  \ (_| | |  | |_) | | |_\ \ | | (_| | |_) | | | | | | | | (_| |
+ |_| \_/\__,_|_|  | .__/   \____/_|  \__,_| .__/|_| |_|_|_| |_|\__, |
+ | |                     | |                   __/ |
+ |_|                     |_|                  |___/
  ***************************************************************************/
 
 import android.app.Dialog;
@@ -25,8 +24,6 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.example.karpgraphing.exp.Expression;
-
 import java.util.Objects;
 
 public class addFunctionActivity extends AppCompatActivity {
@@ -40,7 +37,7 @@ public class addFunctionActivity extends AppCompatActivity {
     EditText a;
     EditText b;
     TextView txt;
-    Expression expression;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +54,6 @@ public class addFunctionActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     putNum(Integer.parseInt((String) key.getTag()));
-
                 }
             });
         }
@@ -154,7 +150,60 @@ public class addFunctionActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void updateExpression(){
-        func.setText(Html.fromHtml(expression.toHtmlString()));
+    public void putPow(){
+        function += a.getText().toString() + "^(" + b.getText().toString() + ')';
+        parsedFunction += a.getText() + "<sup><small>" + b.getText() + "</small></sup>";
+        func.setText(Html.fromHtml(parsedFunction));
+        dialog.dismiss();
     }
+
+    public void putX(View v){
+        function += 'x';
+        parsedFunction += "x";
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putDecimalPoint(View v){
+        function += '.';
+        parsedFunction += ".";
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putAdd(View v){
+        function += '+';
+        parsedFunction += "+";
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putSub(View v){
+        function += '-';
+        parsedFunction = "-";
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putMul(View v){
+        function += '*';
+        parsedFunction += "·";
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putDiv(View v){
+        function += '/';
+        parsedFunction += "/";
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putNum(int num){
+        function += num;
+        parsedFunction += num;
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putLog(){
+        function += "(" + a.getText().toString() + ")!(" + b.getText().toString() + ')';
+        parsedFunction += MathFont.l +MathFont.o + MathFont.g + "<sub><small>" + a.getText() + "</small></sub>" + b.getText();
+        func.setText(Html.fromHtml(parsedFunction));
+        dialog.dismiss();
+    }
+
 }

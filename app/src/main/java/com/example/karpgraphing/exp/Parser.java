@@ -50,10 +50,12 @@ public class Parser {
         // CONSTANT
         m = constant.matcher(exp);
         if(m.matches())
-            return new Constant(m.group(1));
+            return new Constant(exp);
 
         // VARIABLE
-        m = var.matcher(m.group(1));
+        m = var.matcher(exp);
+        if(m.matches())
+            return new Variable(exp);
 
         throw new RuntimeException("Invalid expression");
     }
