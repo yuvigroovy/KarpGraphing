@@ -4,7 +4,7 @@ public class Constant extends BaseExpression {
     private double num;
 
     Constant(String num) {
-        //this.num = num;
+        this.num = Double.parseDouble(num);
     }
 
     @Override

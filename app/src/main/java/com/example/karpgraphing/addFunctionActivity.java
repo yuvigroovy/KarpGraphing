@@ -175,7 +175,7 @@ public class addFunctionActivity extends AppCompatActivity {
         func.setText(Html.fromHtml(parsedFunction));
     }
 
-    public void putSub(View v){
+    public void putSub(View v) {
         function += '-';
         parsedFunction = "-";
         func.setText(Html.fromHtml(parsedFunction));
