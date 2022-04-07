@@ -11,6 +11,7 @@ public class Parser {
     private static final Pattern pow = Pattern.compile("^\\s*(\\S[^\\^]*)\\^\\s*(\\S.*)$");
     private static final Pattern log = Pattern.compile("^\\s*(\\S[^!]*)!\\s*(\\S.*)$");
 
+    private static final Pattern brackets = Pattern.compile("^~$");
     private static final Pattern constant = Pattern.compile("[0-9]+");
     private static final Pattern var = Pattern.compile("^[a-zA-Z]*$");
 
@@ -28,100 +29,36 @@ public class Parser {
     private static final Pattern pow_back = Pattern.compile("^\\s*\\^\\s*(\\S.*)$");
     private static final Pattern log_back = Pattern.compile("^\\s*!\\s*(\\S.*)$");
 
-    public static BaseExpression parse(BaseExpression parsed,String exp){
-        Matcher m;
-
-        // ADD
-        m = add_back.matcher(exp);
-        if(m.matches())
-            return new AddExpression(parsed, parse(m.group(1)));
-
-        // SUB
-        m = sub_back.matcher(exp);
-        if (m.matches())
-            return new SubExpression(parsed, parse(m.group(1)));
-
-        // MUL
-        m = mul_back.matcher(exp);
-        if(m.matches())
-            return new MulExpression(parsed, parse(m.group(1)));
-
-        // DIV
-        m = div_back.matcher(exp);
-        if(m.matches())
-            return new DivExpression(parsed, parse(m.group(1)));
-
-        // POW
-        m = pow_back.matcher(exp);
-        if(m.matches())
-            return new PowExpression(parsed, parse(m.group(1)));
-
-        // LOG
-        m = log_back.matcher(exp);
-        if(m.matches())
-            return new LogExpression(parsed, parse(m.group(1)));
-
-        // CONSTANT
-        m = constant.matcher(exp);
-        if(m.matches())
-            return new Constant(exp);
-
-        // VARIABLE
-        m = var.matcher(exp);
-        if(m.matches())
-            return new Variable(exp);
-
-        throw new RuntimeException("Invalid expression");
-    }
-
-    public static BaseExpression parse(String exp, BaseExpression parsed){
-        Matcher m;
-
-        // ADD
-        m = add_front.matcher(exp);
-        if(m.matches())
-            return new AddExpression(parse(m.group(1)),parsed);
-
-        // SUB
-        m = sub_front.matcher(exp);
-        if (m.matches())
-            return new SubExpression(parse(m.group(1)), parsed);
-
-        // MUL
-        m = mul_front.matcher(exp);
-        if(m.matches())
-            return new MulExpression(parse(m.group(1)), parsed);
-
-        // DIV
-        m = div_front.matcher(exp);
-        if(m.matches())
-            return new DivExpression(parse(m.group(1)),parsed);
-
-        // POW
-        m = pow_front.matcher(exp);
-        if(m.matches())
-            return new PowExpression(parse(m.group(1)),parsed);
-
-        // LOG
-        m = log_front.matcher(exp);
-        if(m.matches())
-            return new LogExpression(parse(m.group(1)),parsed);
-
-        // CONSTANT
-        m = constant.matcher(exp);
-        if(m.matches())
-            return new Constant(exp);
-
-        // VARIABLE
-        m = var.matcher(exp);
-        if(m.matches())
-            return new Variable(exp);
-
-        throw new RuntimeException("Invalid expression");
-    }
+    private static BaseExpression parsedBr;
 
     public static BaseExpression parse(String exp) {
         Matcher m;
+
+        if(exp.contains("(")){
+            int countBr=0, start=0,  stop=0;
+            String br="";
+            for (int i = 0; i < exp.length(); i++) {
+                if(exp.charAt(i) == ')') {
+                    countBr--;
+                    if(countBr == 0)
+                        stop = i;
+                }
+                if(countBr > 0)
+                    br += exp.charAt(i);
+                if(exp.charAt(i) == '(') {
+                    countBr++;
+                    if(countBr == 1)
+                        start = i;
+                }
+            }
+
+            parsedBr = parse(br);
+
+            String post = (String) exp.subSequence(stop+1, exp.length());
+            String pre = (String) exp.subSequence(0, start);
+
+            exp = pre + "~" + post;
+        }
 
         // ADD
         m = add.matcher(exp);
@@ -162,6 +99,10 @@ public class Parser {
         m = var.matcher(exp);
         if(m.matches())
             return new Variable(exp);
+        //BRACKETS
+        m = brackets.matcher(exp);
+        if(m.matches())
+            return parsedBr;
 
         throw new RuntimeException("Invalid expression");
     }
