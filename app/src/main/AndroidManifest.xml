@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KarpGraphing">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".addFunctionActivity"
             android:exported="false" />
         <activity
