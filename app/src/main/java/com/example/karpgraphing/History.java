@@ -57,8 +57,8 @@ public class History extends SQLiteOpenHelper{
     public ArrayList<HistoryItem> getAllItems() {
         database = getReadableDatabase();
         ArrayList<HistoryItem> list = new ArrayList<>();
-        String sortOrder = COLUMN_DATE + "DESC";
-        Cursor cursor = database.query(TABLE_HISTORY, allColumns, null, null, null, null, sortOrder);
+        //String sortOrder = COLUMN_DATE + "DESC";
+        Cursor cursor = database.query(TABLE_HISTORY, allColumns, null, null, null, null, null);
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") String func = cursor.getString(cursor.getColumnIndex(COLUMN_FUNC));

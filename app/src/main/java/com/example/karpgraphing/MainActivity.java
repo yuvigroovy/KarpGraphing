@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         //buttons
         Button clear = findViewById(R.id.clear);
         Button add = findViewById(R.id.add);
+        Button history = findViewById(R.id.goToHistory);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 clear(findViewById(R.id.graph));
+            }
+        });
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToHistory();
             }
         });
 
@@ -89,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
         //add function window intent
         Intent intent  = new Intent(this, addFunctionActivity.class);
         startActivityForResult(intent,10);
+    }
+
+    //move to history menu
+    public void goToHistory(){
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
     }
 
     //add new function

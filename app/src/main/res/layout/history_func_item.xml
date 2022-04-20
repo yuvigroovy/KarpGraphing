@@ -16,10 +16,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/func" />
+        app:layout_constraintTop_toBottomOf="@+id/historyFunc" />
 
     <TextView
-        android:id="@+id/func"
+        android:id="@+id/historyFunc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -30,17 +30,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/Historydate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="1/1"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/func"
+        app:layout_constraintBottom_toBottomOf="@+id/historyFunc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.963"
-        app:layout_constraintStart_toEndOf="@+id/func"
-        app:layout_constraintTop_toTopOf="@+id/func"
+        app:layout_constraintStart_toEndOf="@+id/historyFunc"
+        app:layout_constraintTop_toTopOf="@+id/historyFunc"
         app:layout_constraintVertical_bias="0.611" />
 
 </android.support.constraint.ConstraintLayout>

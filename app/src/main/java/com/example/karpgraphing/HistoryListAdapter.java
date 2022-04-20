@@ -1,41 +1,51 @@
 package com.example.karpgraphing;
 
-import android.content.Context;
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class HistoryListAdapter extends RecyclerView.Adapter<FunctionListAdapter.ViewHolder> {
+public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.HistoryViewHolder> {
+    private ArrayList<HistoryItem> itemList;
 
-    private History historyDb;
-    ArrayList<HistoryItem> functions;
-
-    public HistoryListAdapter(Context context){
-        historyDb = new History(context);
-        this.functions = historyDb.getAllItems();
+    public HistoryListAdapter(ArrayList<HistoryItem> itemList){
+        this.itemList = itemList;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Context context = viewGroup.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View contactView = inflater.inflate(R.layout.history_func_item, viewGroup, false);
-        RecyclerView.ViewHolder viewHolder = new Rec yclerView.ViewHolder(contactView);
-        return viewHolder;
+    public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View historyView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.history_func_item, viewGroup, false);
+        return new HistoryViewHolder(historyView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FunctionListAdapter.ViewHolder viewHolder, int i) {
-
+    public void onBindViewHolder(@NonNull HistoryViewHolder historyViewHolder, int i) {
+        HistoryItem item = itemList.get(i);
+        historyViewHolder.func.setText(item.getFunction());
+        historyViewHolder.date.setText(item.getDate());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itemList.size();
+    }
+
+
+    public static class HistoryViewHolder extends RecyclerView.ViewHolder{
+
+        public TextView func;
+        public TextView date;
+
+        public HistoryViewHolder(@NonNull View itemView) {
+            super(itemView);
+            func = itemView.findViewById(R.id.historyFunc);
+            date = itemView.findViewById(R.id.Historydate);
+        }
     }
 }
