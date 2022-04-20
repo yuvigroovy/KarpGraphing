@@ -90,6 +90,8 @@ public class Parser {
         if(m.matches())
             return new LogExpression(parse(m.group(1)),parse(m.group(2)));
 
+        // special characters
+
         // CONSTANT
         m = constant.matcher(exp);
         if(m.matches())
@@ -103,6 +105,8 @@ public class Parser {
         m = brackets.matcher(exp);
         if(m.matches())
             return parsedBr;
+
+        //Unary functions
 
         throw new RuntimeException("Invalid expression");
     }

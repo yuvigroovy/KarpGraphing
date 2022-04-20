@@ -1,15 +1,26 @@
 package com.example.karpgraphing;
 
-import java.text.DateFormat;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
+import java.time.LocalDateTime;
 
 public class HistoryItem {
     private long id;
-    private DateFormat date;
+    private LocalDateTime cur;
+    private String date;
     private String function;
 
-    public HistoryItem(long id, DateFormat date, String function){
+    public HistoryItem(long id, String date, String function){
         this.id = id;
         this.date = date;
+        this.function = function;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public HistoryItem(long id, String function){
+        this.id = id;
+        this.date = Integer.toString(cur.getDayOfMonth()) + "/" + Integer.toString(cur.getMonthValue());
         this.function = function;
     }
 
@@ -25,7 +36,7 @@ public class HistoryItem {
         return function;
     }
 
-    public void setDate(DateFormat date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
