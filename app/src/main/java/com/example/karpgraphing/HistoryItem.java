@@ -18,7 +18,7 @@ public class HistoryItem {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public HistoryItem(long id, String function){
+    public HistoryItem(String function){
         this.id = id;
         this.date = Integer.toString(cur.getDayOfMonth()) + "/" + Integer.toString(cur.getMonthValue());
         this.function = function;

@@ -15,7 +15,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 import java.util.Objects;
 
 public class addFunctionActivity extends AppCompatActivity {
+    private History historyDb;
     Button log;
     Button pow;
     Button submitDialog;
@@ -45,6 +48,9 @@ public class addFunctionActivity extends AppCompatActivity {
 
         //remove app title
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        //DataBase init
+        historyDb = new History(this);
 
         //numpad init
         TableLayout keypad = findViewById(R.id.keypad);
@@ -105,8 +111,10 @@ public class addFunctionActivity extends AppCompatActivity {
 
         // submit function to main activity
         submit.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+                historyDb.createFunction(new HistoryItem(function));
                 addFunc.putExtra("func",function);
                 setResult(RESULT_OK, addFunc);
                 finish();
