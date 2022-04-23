@@ -14,10 +14,10 @@ package com.example.karpgraphing;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,7 +28,9 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
@@ -37,11 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView funcList;
     private ArrayList<FunctionDetails> list;
     private FunctionListAdapter adapter;
+    private Queue<String> functions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        functions = new LinkedList<>();
 
         //recycle view
         list = new ArrayList<FunctionDetails>();
@@ -101,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     //move to history menu
     public void goToHistory(){
         Intent intent = new Intent(this, HistoryActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,15);
     }
 
     //add new function
@@ -109,15 +114,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if(requestCode==10 && resultCode==RESULT_OK){ //a functions is added
-            GraphView graph = findViewById(R.id.graph);
             String function = data.getExtras().getString("func");
-            graph.addSeries(driver.insertFunction(function));
-            list.add(new FunctionDetails(driver.getNameLastIndex(),driver.getColorToInsert()));
-            adapter = new FunctionListAdapter(list);
-            funcList.setAdapter(adapter);
-            funcList.setLayoutManager(new LinearLayoutManager(this));
-
+            addFunction(function);
         }
+
+        //received functions back
+        if(requestCode==15 && resultCode==RESULT_OK){
+            functions = (Queue<String>) data.getExtras().get("funcQ");
+            while(!functions.isEmpty())
+                addFunction(functions.remove());
+        }
+    }
+
+    //inserting a function and drawing it from a string
+    public void addFunction(String function){
+        GraphView graph = findViewById(R.id.graph);
+        functions.add(function);
+        graph.addSeries(driver.insertFunction(function));
+        list.add(new FunctionDetails(driver.getNameLastIndex(),driver.getColorToInsert()));
+        adapter = new FunctionListAdapter(list);
+        funcList.setAdapter(adapter);
+        funcList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void initGraph(GraphView graph){

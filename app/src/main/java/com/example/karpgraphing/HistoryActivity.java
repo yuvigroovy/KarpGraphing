@@ -1,6 +1,5 @@
 package com.example.karpgraphing;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -45,7 +44,6 @@ public class HistoryActivity extends AppCompatActivity {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void exit(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 }

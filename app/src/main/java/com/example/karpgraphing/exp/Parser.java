@@ -3,31 +3,17 @@ package com.example.karpgraphing.exp;
 import java.util.regex.*;
 
 public class Parser {
-    private String stringExpression;
+
     private static final Pattern sub = Pattern.compile("^\\s*(\\S[^-]*)-\\s*(\\S.*)$"); //every expression that contains '-'
-    private static final Pattern add = Pattern.compile("^\\s*(\\S[^+]*)\\+\\s*(\\S.*)$");
-    private static final Pattern mul = Pattern.compile("^\\s*(\\S[^*]*)\\*\\s*(\\S.*)$");
-    private static final Pattern div = Pattern.compile("^\\s*(\\S[^/]*)/\\s*(\\S.*)$");
-    private static final Pattern pow = Pattern.compile("^\\s*(\\S[^\\^]*)\\^\\s*(\\S.*)$");
-    private static final Pattern log = Pattern.compile("^\\s*(\\S[^!]*)!\\s*(\\S.*)$");
+    private static final Pattern add = Pattern.compile("^\\s*(\\S[^+]*)\\+\\s*(\\S.*)$"); //every expression that contains '+'
+    private static final Pattern mul = Pattern.compile("^\\s*(\\S[^*]*)\\*\\s*(\\S.*)$"); //every expression that contains '*'
+    private static final Pattern div = Pattern.compile("^\\s*(\\S[^/]*)/\\s*(\\S.*)$"); //every expression that contains '/'
+    private static final Pattern pow = Pattern.compile("^\\s*(\\S[^\\^]*)\\^\\s*(\\S.*)$"); //every expression that contains '^'
+    private static final Pattern log = Pattern.compile("^\\s*(\\S[^!]*)!\\s*(\\S.*)$"); //every expression that contains '!'
 
     private static final Pattern brackets = Pattern.compile("^~$");
     private static final Pattern constant = Pattern.compile("[0-9]+");
     private static final Pattern var = Pattern.compile("^[a-zA-Z]*$");
-
-    private static final Pattern sub_front = Pattern.compile("^\\s*(\\S[^-]*)-\\s*$");
-    private static final Pattern add_front = Pattern.compile("^\\s*(\\S[^+]*)\\+\\s*$");
-    private static final Pattern mul_front = Pattern.compile("^\\s*(\\S[^*]*)\\*\\s*$");
-    private static final Pattern div_front = Pattern.compile("^\\s*(\\S[^/]*)/\\s*$");
-    private static final Pattern pow_front = Pattern.compile("^\\s*(\\S[^\\^]*)\\^\\s*$");
-    private static final Pattern log_front = Pattern.compile("^\\s*(\\S[^!]*)!\\s*$");
-
-    private static final Pattern sub_back = Pattern.compile("^\\s*-\\s*(\\S.*)$");
-    private static final Pattern add_back = Pattern.compile("^\\s*\\+\\s*(\\S.*)$");
-    private static final Pattern mul_back = Pattern.compile("^\\s*\\*\\s*(\\S.*)$");
-    private static final Pattern div_back = Pattern.compile("^\\s*/\\s*(\\S.*)$");
-    private static final Pattern pow_back = Pattern.compile("^\\s*\\^\\s*(\\S.*)$");
-    private static final Pattern log_back = Pattern.compile("^\\s*!\\s*(\\S.*)$");
 
     private static BaseExpression parsedBr;
 
@@ -106,11 +92,9 @@ public class Parser {
         if(m.matches())
             return parsedBr;
 
-        //Unary functions
-
         throw new RuntimeException("Invalid expression");
     }
-
+    
 
 
 

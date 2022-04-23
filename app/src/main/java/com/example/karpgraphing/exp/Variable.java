@@ -16,8 +16,4 @@ public class Variable extends BaseExpression {
         return var;
     }
 
-    @Override
-    public String toHtmlString() {
-        return var;
-    }
 }

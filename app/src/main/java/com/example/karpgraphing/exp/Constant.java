@@ -12,10 +12,6 @@ public class Constant extends BaseExpression {
         return this.num;
     }
 
-    @Override
-    public String toHtmlString() {
-        return String.valueOf(num);
-    }
 
     @Override
     public String toPlainString() {

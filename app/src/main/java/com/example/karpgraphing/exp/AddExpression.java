@@ -11,10 +11,6 @@ public class AddExpression extends Expression{
         return a.solve(ns) + b.solve(ns);
     }
 
-    @Override
-    public String toHtmlString() {
-        return a.toHtmlString() + "+" + b.toHtmlString();
-    }
 
     @Override
     public String toPlainString() {

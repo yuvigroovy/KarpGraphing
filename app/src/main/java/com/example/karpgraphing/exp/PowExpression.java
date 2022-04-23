@@ -16,8 +16,5 @@ public class PowExpression extends Expression{
         return a.toPlainString() + "^" + b.toPlainString();
     }
 
-    @Override
-    public String toHtmlString() {
-        return a.toHtmlString() + "<sup><small>" + b.toHtmlString() + "</small></sup>";
-    }
+
 }

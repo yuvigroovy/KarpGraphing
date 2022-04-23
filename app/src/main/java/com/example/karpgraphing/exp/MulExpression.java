@@ -15,9 +15,4 @@ public class MulExpression extends Expression{
     public String toPlainString() {
         return a.toPlainString()  + "*" + b.toPlainString();
     }
-
-    @Override
-    public String toHtmlString() {
-        return a.toHtmlString() + "·" + b.toHtmlString();
-    }
 }

@@ -1,7 +1,5 @@
 package com.example.karpgraphing.exp;
 
-import com.example.karpgraphing.MathFont;
-
 public class LogExpression extends Expression{
     public LogExpression(BaseExpression a, BaseExpression b){
         this.a = a;
@@ -16,10 +14,5 @@ public class LogExpression extends Expression{
     @Override
     public String toPlainString() {
         return a.toPlainString() + "!" + b.toPlainString();
-    }
-
-    @Override
-    public String toHtmlString() {
-        return a.toHtmlString() + MathFont.l +MathFont.o + MathFont.g + "<sub><small>" + b.toHtmlString() + "</small></sub>";
     }
 }

@@ -16,8 +16,4 @@ public class DivExpression extends Expression{
         return a.toPlainString()  + "/" + b.toPlainString();
     }
 
-    @Override
-    public String toHtmlString() {
-        return a.toHtmlString() + "/" + b.toHtmlString();
-    }
 }
