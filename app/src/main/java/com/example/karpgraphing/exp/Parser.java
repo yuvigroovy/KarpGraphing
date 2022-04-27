@@ -4,6 +4,7 @@ import java.util.regex.*;
 
 public class Parser {
 
+    //binary functions
     private static final Pattern sub = Pattern.compile("^\\s*(\\S[^-]*)-\\s*(\\S.*)$"); //every expression that contains '-'
     private static final Pattern add = Pattern.compile("^\\s*(\\S[^+]*)\\+\\s*(\\S.*)$"); //every expression that contains '+'
     private static final Pattern mul = Pattern.compile("^\\s*(\\S[^*]*)\\*\\s*(\\S.*)$"); //every expression that contains '*'
@@ -11,6 +12,12 @@ public class Parser {
     private static final Pattern pow = Pattern.compile("^\\s*(\\S[^\\^]*)\\^\\s*(\\S.*)$"); //every expression that contains '^'
     private static final Pattern log = Pattern.compile("^\\s*(\\S[^!]*)!\\s*(\\S.*)$"); //every expression that contains '!'
 
+    //Unary functions
+    public static final Pattern sin = Pattern.compile("^\\s*§\\s*(\\S.*)$");
+    public static final Pattern cos = Pattern.compile("^\\s*±\\s*(\\S.*)$");
+    public static final Pattern tan = Pattern.compile("^\\s*#\\s*(\\S.*)$");
+
+    //special characters
     private static final Pattern brackets = Pattern.compile("^~$");
     private static final Pattern constant = Pattern.compile("[0-9]+");
     private static final Pattern var = Pattern.compile("^[a-zA-Z]*$");
@@ -76,8 +83,23 @@ public class Parser {
         if(m.matches())
             return new LogExpression(parse(m.group(1)),parse(m.group(2)));
 
-        // special characters
+        //Unary Functions
+        //Sin
+        m = sin.matcher(exp);
+        if(m.matches())
+            return new SinExpression(parse(m.group(1)));
 
+        //Cos
+        m = cos.matcher(exp);
+        if(m.matches())
+            return new CosExpression(parse(m.group(1)));
+
+        //Tan
+        m = tan.matcher(exp);
+        if(m.matches())
+            return new TanExpression(parse(m.group(1)));
+
+        // special characters
         // CONSTANT
         m = constant.matcher(exp);
         if(m.matches())

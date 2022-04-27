@@ -15,6 +15,12 @@ public class HtmlParser {
                 }
                 parsed +="</small></sup>";
             }
+            else if(fun.charAt(i) == '§')
+                parsed += MathFont.s + MathFont.i + MathFont.n;
+            else if(fun.charAt(i) == '±')
+                parsed += MathFont.c + MathFont.o + MathFont.s;
+            else if(fun.charAt(i) == '#')
+                parsed += MathFont.t + MathFont.a + MathFont.n;
             else
                 parsed += fun.charAt(i);
         }

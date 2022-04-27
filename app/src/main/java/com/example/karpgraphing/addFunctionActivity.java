@@ -32,6 +32,9 @@ public class addFunctionActivity extends AppCompatActivity {
     private History historyDb;
     Button log;
     Button pow;
+    Button sin;
+    Button cos;
+    Button tan;
     Button submitDialog;
     String function;
     String parsedFunction;
@@ -67,6 +70,18 @@ public class addFunctionActivity extends AppCompatActivity {
         func = findViewById(R.id.function);
         Button submit = findViewById(R.id.submit);
 
+        //sin button init
+        sin = findViewById(R.id.sin);
+        sin.setText(MathFont.s + MathFont.i + MathFont.n);
+
+        //cos button init
+        cos = findViewById(R.id.cos);
+        cos.setText(MathFont.c + MathFont.o + MathFont.s);
+
+        //tan button init
+        tan = findViewById(R.id.tangense);
+        tan.setText(MathFont.t + MathFont.a + MathFont.n);
+
         //log function button init
         log = findViewById(R.id.logBtn);
         log.setText(Html.fromHtml(MathFont.l + MathFont.o + MathFont.g +"<sub><small>"+ MathFont.a +"</small></sub>" + MathFont.b));
@@ -98,10 +113,35 @@ public class addFunctionActivity extends AppCompatActivity {
             }
         });
 
+        //log function button onclick
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logOnClick();
+            }
+        });
+
+        //sin function button onclick
+        sin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putSin();
+            }
+        });
+
+        //cos function button onclick
+        cos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putCos();
+            }
+        });
+
+        //tan function button onclick
+        tan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putTan();
             }
         });
 
@@ -204,6 +244,24 @@ public class addFunctionActivity extends AppCompatActivity {
     public void putNum(int num){
         function += num;
         parsedFunction += num;
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putSin(){
+        function += "§";
+        parsedFunction += MathFont.s + MathFont.i + MathFont.n;
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putCos(){
+        function += "±";
+        parsedFunction += MathFont.c + MathFont.o + MathFont.s;
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putTan(){
+        function += "#";
+        parsedFunction += MathFont.t + MathFont.a + MathFont.n;
         func.setText(Html.fromHtml(parsedFunction));
     }
 

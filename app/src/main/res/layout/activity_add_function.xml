@@ -66,6 +66,17 @@
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="380dp"
+        android:layout_height="3dp"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/Pow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/subBtn"
         android:layout_width="45dp"
@@ -317,5 +328,37 @@
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/sin"
+        android:layout_width="80dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="12dp"
+        android:background="#ffffff"
+        android:text="sin"
+        app:layout_constraintBottom_toBottomOf="@+id/tangense"
+        app:layout_constraintEnd_toStartOf="@+id/tangense"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/tangense"
+        android:layout_width="77dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="60dp"
+        android:background="#ffffff"
+        android:text="tan"
+        app:layout_constraintBottom_toBottomOf="@+id/cos"
+        app:layout_constraintEnd_toStartOf="@+id/cos" />
+
+    <Button
+        android:id="@+id/cos"
+        android:layout_width="72dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="20dp"
+        android:background="#ffffff"
+        android:text="cos"
+        app:layout_constraintBottom_toTopOf="@+id/divider7"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
