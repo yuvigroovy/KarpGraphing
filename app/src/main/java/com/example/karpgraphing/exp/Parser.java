@@ -1,5 +1,6 @@
 package com.example.karpgraphing.exp;
 
+import java.util.Stack;
 import java.util.regex.*;
 
 public class Parser {
@@ -22,7 +23,7 @@ public class Parser {
     private static final Pattern constant = Pattern.compile("[0-9]+");
     private static final Pattern var = Pattern.compile("^[a-zA-Z]*$");
 
-    private static BaseExpression parsedBr;
+    private static Stack<BaseExpression> parsedBrStack = new Stack<>();
 
     public static BaseExpression parse(String exp) {
         Matcher m;
@@ -45,7 +46,7 @@ public class Parser {
                 }
             }
 
-            parsedBr = parse(br);
+            parsedBrStack.push(parse(br));
 
             String post = (String) exp.subSequence(stop+1, exp.length());
             String pre = (String) exp.subSequence(0, start);
@@ -112,7 +113,7 @@ public class Parser {
         //BRACKETS
         m = brackets.matcher(exp);
         if(m.matches())
-            return parsedBr;
+            return parsedBrStack.pop();
 
         throw new RuntimeException("Invalid expression");
     }
