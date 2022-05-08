@@ -30,6 +30,8 @@ import java.util.Objects;
 
 public class addFunctionActivity extends AppCompatActivity {
     private History historyDb;
+    Button openBr;
+    Button closeBr;
     Button log;
     Button pow;
     Button sin;
@@ -70,6 +72,10 @@ public class addFunctionActivity extends AppCompatActivity {
         func = findViewById(R.id.function);
         Button submit = findViewById(R.id.submit);
 
+        //brackets buttons init
+        openBr = findViewById(R.id.opbr);
+        closeBr = findViewById(R.id.clbr);
+
         //sin button init
         sin = findViewById(R.id.sin);
         sin.setText(MathFont.s + MathFont.i + MathFont.n);
@@ -104,6 +110,20 @@ public class addFunctionActivity extends AppCompatActivity {
         b = dialog.findViewById(R.id.b);
 
         txt = dialog.findViewById(R.id.Title);
+
+        //brackets buttons onclick
+        openBr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putOpenBr();
+            }
+        });
+        closeBr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putCloseBr();
+            }
+        });
 
         //pow function button onclick
         pow.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +190,7 @@ public class addFunctionActivity extends AppCompatActivity {
         });
     }
 
+
     public void logOnClick(){
         function = func.getText().toString();
         txt.setText(Html.fromHtml(MathFont.l +MathFont.o + MathFont.g + "<sub><small>" + MathFont.a + "</small></sub>" + MathFont.b));
@@ -196,6 +217,18 @@ public class addFunctionActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    public void putOpenBr(){
+        function += "(";
+        parsedFunction += "(";
+        func.setText(Html.fromHtml(parsedFunction));
+    }
+
+    public void putCloseBr(){
+        function += ")";
+        parsedFunction += ")";
+        func.setText(Html.fromHtml(parsedFunction));
     }
 
     public void putPow(){

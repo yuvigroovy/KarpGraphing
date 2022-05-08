@@ -112,10 +112,32 @@
         app:layout_constraintStart_toEndOf="@+id/mulBtn" />
 
     <Button
+        android:id="@+id/opbr"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="#BAE1FF"
+        android:onClick="putDiv"
+        android:text="("
+        app:layout_constraintBottom_toBottomOf="@+id/mulBtn"
+        app:layout_constraintStart_toEndOf="@+id/divBtn" />
+
+    <Button
+        android:id="@+id/clbr"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="#BAE1FF"
+        android:onClick="putDiv"
+        android:text=")"
+        app:layout_constraintBottom_toBottomOf="@+id/mulBtn"
+        app:layout_constraintStart_toEndOf="@+id/opbr" />
+
+    <Button
         android:id="@+id/addBtn"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#BAE1FF"
         android:onClick="putAdd"
